@@ -1,5 +1,5 @@
-;; (setq org-clock-continuously t)
-;; (setq org-clock-mode-line-total 'current)
+(setq org-clock-continuously t)
+(setq org-clock-mode-line-total 'current)
 ;; tags
 (setq org-tag-persistent-alist '(("errands" . ?e) ("work" . nil)
 		      (:startgroup . nil) ("family" . nil)
@@ -29,50 +29,49 @@
 			     "~/org/inbox.org"
 			     "~/org/articals.org"
 			     ))
-;; ;; task status, surface -- 5.1 V
+;; task status, surface -- 5.1 V
+(setq org-todo-keywords
+     (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+        (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "INTERRUPT"))))
+(setq org-todo-keyword-faces
+      (quote (("TODO" :foreground "red" :weight bold)
+              ("NEXT" :foreground "blue" :weight bold)
+	      ("DONE" :foreground "forest green" :weight bold)
+              ("WAITING" :foreground "orange" :weight bold)
+              ("HOLD" :foreground "magenta" :weight bold)
+	      ("CANCELLED" :foreground "forest green" :weight bold)
+	      ("INTERRUPT" :foreground "forest green" :weight bold))))
 ;; (setq org-todo-keywords
-;;      (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
-;;         (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "INTERRUPT"))))
-;; (setq org-todo-keyword-faces
-;;       (quote (("TODO" :foreground "red" :weight bold)
-;;               ("NEXT" :foreground "blue" :weight bold)
-;; 	      ("DONE" :foreground "forest green" :weight bold)
-;;               ("WAITING" :foreground "orange" :weight bold)
-;;               ("HOLD" :foreground "magenta" :weight bold)
-;; 	      ("CANCELLED" :foreground "forest green" :weight bold)
-;; 	      ("INTERRUPT" :foreground "forest green" :weight bold))))
-;; ;; (setq org-todo-keywords
-;; ;;      (quote ((sequence "TODO(t)" "NEXT(n)" "ARRANGED(a)" "|" "DONE(d)")
-;; ;;	      (sequence "HOLD(h@/!)" "|" "MEETING" "INTERRUPT"))))
-;; ;;(setq org-todo-keyword-faces
-;; ;;      (quote (("TODO" :foreground "red" :weight bold)
-;; ;;              ("ARRANGED" :foreground "orange" :weight bold)
-;; ;;              ("NEXT" :foreground "blue" :weight bold)
-;; ;;              ("HOLD" :foreground "magenta" :weight bold)
-;; ;;	      ("MEETING" :foreground "forest green" :weight bold)
-;; ;;	      ("INTERRUPT" :foreground "forest green" :weight bold)
-;; ;;              ("DONE" :foreground "forest green" :weight bold))))
-;; 
-;; ;; task status switch and trgger -- 5.2 V, 5.3V
-;; (setq org-use-fast-todo-selection t)
-;; (setq org-treat-S-cursor-todo-selection-as-state-change nil)
-;; (setq org-todo-state-tags-triggers
-;;       (quote (("CANCELLED" ("CANCELLED" . t))
-;;               ("WAITING" ("WAITING" . t))
-;;               ("HOLD" ("WAITING") ("HOLD" . t))
-;;               (done ("WAITING") ("HOLD"))
-;;               ("TODO" ("CANCELLED") ("HOLD") ("WAITING"))
-;;               ("NEXT" ("CANCELLED") ("HOLD") ("WAITING"))
-;;               ("DONE" ("CANCELLED") ("HOLD") ("WAITING")))))
-;; ;;(setq org-todo-state-tags-triggers
-;; ;;      (quote (("ARRANGED" ("NEXT") ("HOLD") ("ARRANGED" . t))
-;; ;;              ("TODO" ("NEXT") ("ARRANGED"))
-;; ;;              ("NEXT" ("ARRANGED") ("NEXT" . t))
-;; ;;              ("HOLD" ("ARRANGED") ("HOLD" . t))
-;; ;;              (done ("ARRANGED") ("NEXT") ("HOLD"))
-;; ;;              ("DONE" ("ARRANGED") ("NEXT") ("HOLD")))))
-;; ;; capture tasks -- 6.1
-;; (global-set-key (kbd "C-c c") 'org-capture)
+;;      (quote ((sequence "TODO(t)" "NEXT(n)" "ARRANGED(a)" "|" "DONE(d)")
+;;	      (sequence "HOLD(h@/!)" "|" "MEETING" "INTERRUPT"))))
+;;(setq org-todo-keyword-faces
+;;     (quote (("TODO" :foreground "red" :weight bold)
+;;              ("ARRANGED" :foreground "orange" :weight bold)
+;;              ("NEXT" :foreground "blue" :weight bold)
+;;              ("HOLD" :foreground "magenta" :weight bold)
+;;	      ("MEETING" :foreground "forest green" :weight bold)
+;;	      ("INTERRUPT" :foreground "forest green" :weight bold)
+;;              ("DONE" :foreground "forest green" :weight bold))))
+
+;; task status switch and trgger -- 5.2 V, 5.3V
+(setq org-use-fast-todo-selection t)
+(setq org-treat-S-cursor-todo-selection-as-state-change nil)
+(setq org-todo-state-tags-triggers
+      (quote (("CANCELLED" ("CANCELLED" . t))
+              ("WAITING" ("WAITING" . t))
+              ("HOLD" ("WAITING") ("HOLD" . t))
+              (done ("WAITING") ("HOLD"))
+              ("TODO" ("CANCELLED") ("HOLD") ("WAITING"))
+              ("NEXT" ("CANCELLED") ("HOLD") ("WAITING"))
+              ("DONE" ("CANCELLED") ("HOLD") ("WAITING")))))
+;;(setq org-todo-state-tags-triggers
+;;      (quote (("ARRANGED" ("NEXT") ("HOLD") ("ARRANGED" . t))
+;;              ("TODO" ("NEXT") ("ARRANGED"))
+;;              ("NEXT" ("ARRANGED") ("NEXT" . t))
+;;              ("HOLD" ("ARRANGED") ("HOLD" . t))
+;;              (done ("ARRANGED") ("NEXT") ("HOLD"))
+;;              ("DONE" ("ARRANGED") ("NEXT") ("HOLD")))))
+;; capture tasks -- 6.1
 ;; (setq org-capture-templates
 ;;       (quote (("t" "Todo" entry (file+headline "~/org/inbox.org" "<Inbox>")
 ;;                "* TODO %?\n %i\n" :clock-in t :clock-resume t)

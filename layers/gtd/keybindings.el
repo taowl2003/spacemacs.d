@@ -7,10 +7,10 @@
 
 ;; key binding -- 4.6 V
 ;;     jump: often
-(global-set-key (kbd "<f5>") 'bookmark-jump)
-(global-set-key (kbd "<f6>") 'bookmark-set)
-;;(global-set-key (kbd "C-<f9>") 'previous-buffer)
-;;(global-set-key (kbd "C-<f10>") 'next-buffer)
+;; (global-set-key (kbd "<f5>") 'bookmark-jump)
+;; (global-set-key (kbd "<f6>") 'bookmark-set)
+;; (global-set-key (kbd "C-<f9>") 'previous-buffer)
+;; (global-set-key (kbd "C-<f10>") 'next-buffer)
 ;;     clock: often
 (global-set-key (kbd "<f9> I") 'bh/punch-in);;'org-clock-out)
 (global-set-key (kbd "<f9> SPC") 'bh/clock-in-select-task);;'org-clock-select-task)
@@ -24,4 +24,5 @@
 (global-set-key (kbd "<f9> c") 'calendar)
 (global-set-key (kbd "<f9> h") 'bh/hide-other)
 (global-set-key (kbd "<f9> n") 'bh/toggle-next-task-display)
-;;
+;; capture -- 6.1
+(global-set-key (kbd "C-c c") 'org-capture)

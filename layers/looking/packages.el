@@ -1,4 +1,4 @@
-;;; packages.el --- gtd layer packages file for Spacemacs.
+;;; packages.el --- looking layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
@@ -18,20 +18,22 @@
 ;;
 ;;
 ;; Briefly, each package to be installed or configured by this layer should be
-;; added to `gtd-packages'. Then, for each package PACKAGE:
+;; added to `looking-packages'. Then, for each package PACKAGE:
 ;;
 ;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `gtd/init-PACKAGE' to load and initialize the package.
+;;   function `looking/init-PACKAGE' to load and initialize the package.
 
 ;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `gtd/pre-init-PACKAGE' and/or
-;;   `gtd/post-init-PACKAGE' to customize the package as it is loaded.
+;;   define the functions `looking/pre-init-PACKAGE' and/or
+;;   `looking/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
 
-(defconst gtd-packages
-  '()
-  "The list of Lisp packages required by the gtd layer.
+(defconst looking-packages
+  '(darkroom :location melpa-cn)
+
+
+  "The list of Lisp packages required by the looking layer.
 
 Each entry is either:
 
@@ -57,5 +59,17 @@ Each entry is either:
 
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
+
+(defun dark/init-dark-mode ()
+  (use-package dark-room
+    ;; Some configuration goes here, however nothing relating to company
+    ;; since this function may be called even if company is not installed!
+    ))
+
+  (defun yoyo/post-init-dark-mode ()
+    ;; This makes no reference to `some-weird-package', which may have
+    ;; been excluded by the user
+    (spacemacs|add-company-hook dark-mode))
+
 
 ;;; packages.el ends here
