@@ -1,52 +1,5 @@
 (provide 'twl-org)
 
-(setq org-clock-continuously t)
-(setq org-clock-mode-line-total 'current)
-;; tags
-(setq org-tag-persistent-alist '(("errands" . ?e) ("work" . nil)
-		      (:startgroup . nil) ("family" . nil)
-                      ("engineering" . nil) ("faculty" . nil)
-		      ("research" . nil) ("knowledge" . nil)
-                      (:endgroup . nil)
-		      ("ARRANGED" . ?a) ("HOLD" . nil)
-                      ("@read" . ?r) ("@references" . nil)
-                      ("@computer" . ?c) ("@out" . ?o)
-		      ("@phone" . ?p) ("@mail" . ?x)
-		      ("@writing" . nil)
-		      (:startgroup . nil)
-                      ("#day" . ?d) ("#week" . ?w)
-		      ("#month" . ?m) ("#year" . ?y)
-		      (:endgroup . nil)
-		      ("FLAGGED" . ??)
-                      ))
-;; basic setup -- 4.2
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-;; agenda files -- 4.4 V
-(setq org-agenda-files (list "~/org/researchProj.org"
-			     "~/org/riverProj.org"
-			     "~/org/othersProj.org"
-			     "~/org/bibliography.org"
-			     "~/org/knowledge.org"
-			     "~/org/faculty.org"
-			     "~/org/family.org"
-			     "~/org/journal.org"
-			     "~/org/inbox.org"
-			     "~/org/articals.org"
-			     ))
-;; key binding -- 4.6 V
-;;     jump: often
-(global-set-key (kbd "<f5>") 'bookmark-jump)
-(global-set-key (kbd "<f6>") 'bookmark-set)
-;;(global-set-key (kbd "C-<f9>") 'previous-buffer)
-;;(global-set-key (kbd "C-<f10>") 'next-buffer)
-;;     clock: often
-(global-set-key (kbd "<f12>") 'org-agenda)
-(global-set-key (kbd "<f9> I") 'bh/punch-in);;'org-clock-out)
-(global-set-key (kbd "<f9> SPC") 'bh/clock-in-select-task);;'org-clock-select-task)
-(global-set-key (kbd "<f11>") 'org-clock-goto)
-(global-set-key (kbd "C-<f11>") 'org-clock-in)
 ;;     used
 (global-set-key (kbd "<f7>") 'bh/set-truncate-lines)
 (global-set-key (kbd "<f9> v") 'visible-mode)
