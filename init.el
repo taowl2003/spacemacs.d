@@ -64,6 +64,7 @@ values."
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(org-projectile
+                                    chinese-pyim
                                     org-packages)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -332,6 +333,13 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq yas-snippet-dirs "~/.emacs.d/elpa/yasnippet-20170828.1908")
+  ;; Resume clocking task when emacs is restarted
+  (org-clock-persistence-insinuate)
+  (setq org-clock-persist t)
+  (setq org-clock-in-resume t)
+  ;; (setq org-clock-out-remove-zero-time-clocks t)
+  (setq org-clock-out-when-done t)
+  (setq org-clock-report-include-clocking-task t)
   (setq spaceline-org-clock-p t)
   )
 

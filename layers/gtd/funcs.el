@@ -471,6 +471,3 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
               (setq params (plist-put params :tags tag))
               (clocktable-by-tag/insert-tag params))
             tags)))
-
-
-
