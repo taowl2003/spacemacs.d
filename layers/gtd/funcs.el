@@ -150,7 +150,7 @@ Switch projects and subprojects from NEXT back to TODO"
              (not org-clock-resolving-clocks-due-to-idleness))
     (bh/clock-in-parent-task)))
 
-(require 'org-id)
+;; (require 'org-id)
 (defun bh/clock-in-task-by-id (id)
   "Clock in a task by id"
   (org-with-point-at (org-id-find id 'marker)
@@ -471,3 +471,6 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
               (setq params (plist-put params :tags tag))
               (clocktable-by-tag/insert-tag params))
             tags)))
+
+
+

@@ -85,25 +85,25 @@
 ;;              ("DONE" ("ARRANGED") ("NEXT") ("HOLD")))))
 ;; capture tasks -- 6.1
 (setq org-capture-templates
-      (quote (("t" "Todo" entry (file+headline "~/org/inbox.org" "<Inbox>")
+      (quote (("t" "Todo" entry (file+headline "d:/Sync/CloudStation/App/Emacs/org/inbox.org" "<Inbox>")
                "* TODO %?\n %i\n" :clock-in t :clock-resume t)
 ;;	      ("d" "Dictionary" entry (file+headline "~/org/inbox.org" "<Inbox>")
 ;;	       "* TODO Dictionary: %?\n" :clock-in t :clock-resume t)
-	      ("n" "Note" entry (file+headline "~/org/inbox.org" "<Inbox>")
+	      ("n" "Note" entry (file+headline "d:/Sync/CloudStation/App/Emacs/org/inbox.org" "<Inbox>")
                "* %? :reference:\n" :clock-in t :clock-resume t)
 ;;	      ("l" "Log of time" entry (file+headline "~/org/inbox.org" "<Inbox>")
 ;;               "* %U: %?\n" :clock-in t :clock-resume t)
 ;;              ("m" "Meeting" entry (file+headline "~/org/Errands.org" "<Inbox>")
 ;;	       "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-              ("i" "Interrupt" entry (file+headline "~/org/inbox.org" "<Inbox>")
+              ("i" "Interrupt" entry (file+headline "d:/Sync/CloudStation/App/Emacs/org/inbox.org" "<Inbox>")
 	       "* INTERRUPT by %? :INTERRUPT:\n%U" :clock-in t :clock-resume t)
-	      ("h" "Habit" entry (file+headline "~/org/inbox.org" "<Inbox>")
+	      ("h" "Habit" entry (file+headline "d:/Sync/CloudStation/App/Emacs/org/inbox.org" "<Inbox>")
                "* TODO %?\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:END:\n")
-	      ("j" "Journal" entry (file+datetree "~/org/journal.org")
+	      ("j" "Journal" entry (file+datetree "d:/Sync/CloudStation/App/Emacs/org/journal.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
-	      ("r" "week review" entry (file+datetree "~/org/journal.org")
+	      ("r" "week review" entry (file+datetree "d:/Sync/CloudStation/App/Emacs/org/journal.org")
                "* %(format-time-string \"%Y-%W\")(-7)-Review %? :#diary:#week:\n%U\n- 时间开销\n  - 研究: \n  - 阅读: \n  - 工程: \n  - 院系: \n  - 组织: \n- 上周计划\n  \n- 主要完成任务\n  \n- 回顾\n\n- 总结\n\n" :clock-in t :clock-resume t)
-	      ("p" "week plan" entry (file+datetree "~/org/journal.org")
+	      ("p" "week plan" entry (file+datetree "d:/Sync/CloudStation/App/Emacs/org/journal.org")
                "* %(format-time-string \"%Y-%W\")(-7)-Plan%? :#plan:#week:\n%U\n- [ ] \n" :clock-in t :clock-resume t)
 	      )))
 ;;     Remove empty LOGBOOK drawers on clock out
@@ -243,87 +243,87 @@
                        (org-agenda-skip-function 'bh/skip-non-archivable-tasks)
                        (org-tags-match-list-sublevels nil))))
                nil))))
-;; 9.1
-;;
-;; Resume clocking task when emacs is restarted
-(org-clock-persistence-insinuate)
-;;
-;; Show lot of clocking history so it's easy to pick items off the C-F11 list
-(setq org-clock-history-length 23)
-;; Resume clocking task on clock-in if the clock is open
-(setq org-clock-in-resume t)
-;; Change tasks to NEXT when clocking in
-(setq org-clock-in-switch-to-state 'bh/clock-in-to-next)
-;; Separate drawers for clocking and logs
-(setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
-;; Save clock data and state changes and notes in the LOGBOOK drawer
-(setq org-clock-into-drawer t)
-(setq org-log-into-drawer t)
-;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
-(setq org-clock-out-remove-zero-time-clocks t)
-;; Clock out when moving task to a done state
-(setq org-clock-out-when-done t)
-;; Save the running clock and all clock history when exiting Emacs, load it on startup
-(setq org-clock-persist t)
-;; Do not prompt to resume an active clock
-(setq org-clock-persist-query-resume nil)
-;; Enable auto clock resolution for finding open clocks
-(setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
-;; Include current clocking task in clock reports
-(setq org-clock-report-include-clocking-task t)
-(add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
-;; 10.2 column
-; Set default column view headings: Task Effort Clock_Summary
-(setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
-
-; global Effort estimate values
-; global STYLE property values for completion
-(setq org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
-                                    ("STYLE_ALL" . "habit"))))
-;; 10.3 report
-;; Agenda log mode items to display (closed and state changes by default)
-(setq org-agenda-log-mode-items (quote (closed state)))
-
-(setq org-agenda-clockreport-parameter-plist
-      (quote (:link t :maxlevel 3 :fileskip0 t :compact nil :narrow 80 )))
-;; 14.1
-(setq org-agenda-span 'day)
-;; 14.2
-(setq org-stuck-projects (quote ("" nil nil "")))
-
+;; ;; 9.1
+;; ;;
+;; ;; Resume clocking task when emacs is restarted
+;; (org-clock-persistence-insinuate)
+;; ;;
+;; ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
+;; (setq org-clock-history-length 23)
+;; ;; Resume clocking task on clock-in if the clock is open
+;; (setq org-clock-in-resume t)
+;; ;; Change tasks to NEXT when clocking in
+;; (setq org-clock-in-switch-to-state 'bh/clock-in-to-next)
+;; ;; Separate drawers for clocking and logs
+;; (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
+;; ;; Save clock data and state changes and notes in the LOGBOOK drawer
+;; (setq org-clock-into-drawer t)
+;; (setq org-log-into-drawer t)
+;; ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
+;; (setq org-clock-out-remove-zero-time-clocks t)
+;; ;; Clock out when moving task to a done state
+;; (setq org-clock-out-when-done t)
+;; ;; Save the running clock and all clock history when exiting Emacs, load it on startup
+;; (setq org-clock-persist t)
+;; ;; Do not prompt to resume an active clock
+;; (setq org-clock-persist-query-resume nil)
+;; ;; Enable auto clock resolution for finding open clocks
+;; (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
+;; ;; Include current clocking task in clock reports
+;; (setq org-clock-report-include-clocking-task t)
+;; (add-hook 'org-clock-out-hook 'bh/clock-out-maybe 'append)
+;; ;; 10.2 column
+;; ; Set default column view headings: Task Effort Clock_Summary
+;; (setq org-columns-default-format "%80ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM")
+;; 
+;; ; global Effort estimate values
+;; ; global STYLE property values for completion
+;; (setq org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")
+;;                                     ("STYLE_ALL" . "habit"))))
+;; ;; 10.3 report
+;; ;; Agenda log mode items to display (closed and state changes by default)
+;; (setq org-agenda-log-mode-items (quote (closed state)))
+;; 
+;; (setq org-agenda-clockreport-parameter-plist
+;;       (quote (:link t :maxlevel 3 :fileskip0 t :compact nil :narrow 80 )))
+;; ;; 14.1
+;; (setq org-agenda-span 'day)
+;; ;; 14.2
+;; (setq org-stuck-projects (quote ("" nil nil "")))
+;; 
 (defvar bh/hide-scheduled-and-waiting-next-tasks t)
-
-;; 18.28
-(setq org-list-demote-modify-bullet (quote (("-" . "+")
-					    ("+" . "*")
-                                            ("*" . "-")
-                                            ("1." . "1)")
-                                            ("1)" . "-")
-                                            ("A." . "A)")
-                                            ("A)" . "a.")
-                                            ("a)" . "-")
-                                            ("a." . "a)"))))
-;; 18.4
-(require 'org-checklist)
-
-(add-hook 'org-after-todo-state-change-hook 'bh/mark-next-parent-tasks-todo 'append)
-(add-hook 'org-clock-in-hook 'bh/mark-next-parent-tasks-todo 'append)
-;; 18.54
-(setq org-time-clocksum-format
-      '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
-;; 19.9
-(setq org-enable-priority-commands t)
-(setq org-default-priority ?E)
-(setq org-lowest-priority ?E)
-;;;;;;;;;;;;;;;;;;;;;;;
-(require 'org-habit)
-(setq org-log-done t)
-(global-visual-line-mode t)
-(org-clock-persistence-insinuate)
-;; 18.14
+;; 
+;; ;; 18.28
+;; (setq org-list-demote-modify-bullet (quote (("-" . "+")
+;; 					    ("+" . "*")
+;;                                             ("*" . "-")
+;;                                             ("1." . "1)")
+;;                                             ("1)" . "-")
+;;                                             ("A." . "A)")
+;;                                             ("A)" . "a.")
+;;                                             ("a)" . "-")
+;;                                             ("a." . "a)"))))
+;; ;; 18.4
+;; (require 'org-checklist)
+;; 
+;; (add-hook 'org-after-todo-state-change-hook 'bh/mark-next-parent-tasks-todo 'append)
+;; (add-hook 'org-clock-in-hook 'bh/mark-next-parent-tasks-todo 'append)
+;; ;; 18.54
+;; (setq org-time-clocksum-format
+;;       '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+;; ;; 19.9
+;; (setq org-enable-priority-commands t)
+;; (setq org-default-priority ?E)
+;; (setq org-lowest-priority ?E)
+;; ;;;;;;;;;;;;;;;;;;;;;;;
+;; (require 'org-habit)
+;; (setq org-log-done t)
+;; (global-visual-line-mode t)
+;; (org-clock-persistence-insinuate)
+;; ;; 18.14
 ; Enable habit tracking (and a bunch of other modules)
 (setq org-modules (quote (org-bbdb
-                         org-bibtex
+                          org-bibtex
                           org-crypt
                           org-gnus
                           org-id
@@ -350,19 +350,20 @@
     ("bibpath"   . "d:/Sync/CloudStation/BibliographyLib/")))
 ;;  (font-lock-fontify-buffer))
 
-;; org链接的默认打开程序
-;;(require 'org)
-;;(add-hook 'org-mode-hook
-;;      '(lambda ()
-;;;;         (delete '("\\.pdf\\'" . default) org-file-apps)
-;;	 (add-to-list 'org-file-apps '("\\.doc\\'" . default))
-;;	 (add-to-list 'org-file-apps '("\\.docx\\'" . default))
-;;	 (add-to-list 'org-file-apps '("\\.xls\\'" . default))
-;;	 (add-to-list 'org-file-apps '("\\.xlsx\\'" . default))))
-;;(eval-after-load "org"
-;;  '(progn
-     ;; .txt files aren't in the list initially, but in case that changes
-     ;; in a future version of org, use if to avoid errors
-;;     (add-to-list 'org-file-apps '("\\.doc\\'" . default) t)))
-;;;;;;;;;;;;;;;;;;;;;
-;; \\\\\\\\\\\\\\\ org-mode ///////////////
+;; ;; org链接的默认打开程序
+;; ;;(require 'org)
+;; ;;(add-hook 'org-mode-hook
+;; ;;      '(lambda ()
+;; ;;;;         (delete '("\\.pdf\\'" . default) org-file-apps)
+;; ;;	 (add-to-list 'org-file-apps '("\\.doc\\'" . default))
+;; ;;	 (add-to-list 'org-file-apps '("\\.docx\\'" . default))
+;; ;;	 (add-to-list 'org-file-apps '("\\.xls\\'" . default))
+;; ;;	 (add-to-list 'org-file-apps '("\\.xlsx\\'" . default))))
+;; ;;(eval-after-load "org"
+;; ;;  '(progn
+;;      ;; .txt files aren't in the list initially, but in case that changes
+;;      ;; in a future version of org, use if to avoid errors
+;; ;;     (add-to-list 'org-file-apps '("\\.doc\\'" . default) t)))
+;; ;;;;;;;;;;;;;;;;;;;;;
+;; ;; \\\\\\\\\\\\\\\ org-mode ///////////////
+;; 
