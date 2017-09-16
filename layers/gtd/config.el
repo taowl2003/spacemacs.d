@@ -18,16 +18,16 @@
 		      ("FLAGGED" . ??)
                       ))
 ;; agenda files -- 4.4 V
-(setq org-agenda-files (list "d:/Sync/CloudStation/App/Emacs/org/researchProj.org"
-			     "d:/Sync/CloudStation/App/Emacs/org/riverProj.org"
-			     "d:/Sync/CloudStation/App/Emacs/org/othersProj.org"
-			     "d:/Sync/CloudStation/App/Emacs/org/bibliography.org"
-			     "d:/Sync/CloudStation/App/Emacs/org/knowledge.org"
-			     "d:/Sync/CloudStation/App/Emacs/org/faculty.org"
-			     "d:/Sync/CloudStation/App/Emacs/org/family.org"
-			     "d:/Sync/CloudStation/App/Emacs/org/journal.org"
-			     "d:/Sync/CloudStation/App/Emacs/org/inbox.org"
-			     "d:/Sync/CloudStation/App/Emacs/org/articals.org"
+(setq org-agenda-files (list "d:/Sync/CloudStation/orgmode/orgfiles/researchProj.org"
+			     "d:/Sync/CloudStation/orgmode/orgfiles/riverProj.org"
+			     "d:/Sync/CloudStation/orgmode/orgfiles/othersProj.org"
+			     "d:/Sync/CloudStation/orgmode/orgfiles/bibliography.org"
+			     "d:/Sync/CloudStation/orgmode/orgfiles/knowledge.org"
+			     "d:/Sync/CloudStation/orgmode/orgfiles/faculty.org"
+			     "d:/Sync/CloudStation/orgmode/orgfiles/family.org"
+			     "d:/Sync/CloudStation/orgmode/orgfiles/journal.org"
+			     "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org"
+			     "d:/Sync/CloudStation/orgmode/orgfiles/articals.org"
 			     ))
 ; (setq org-agenda-files (list "~/org/researchProj.org"
 ;                              "~/org/riverProj.org"
@@ -85,25 +85,25 @@
 ;;              ("DONE" ("ARRANGED") ("NEXT") ("HOLD")))))
 ;; capture tasks -- 6.1
 (setq org-capture-templates
-      (quote (("t" "Todo" entry (file+headline "d:/Sync/CloudStation/App/Emacs/org/inbox.org" "<Inbox>")
+      (quote (("t" "Todo" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
                "* TODO %?\n %i\n" :clock-in t :clock-resume t)
-;;	      ("d" "Dictionary" entry (file+headline "~/org/inbox.org" "<Inbox>")
+;;	      ("d" "Dictionary" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
 ;;	       "* TODO Dictionary: %?\n" :clock-in t :clock-resume t)
-	      ("n" "Note" entry (file+headline "d:/Sync/CloudStation/App/Emacs/org/inbox.org" "<Inbox>")
+	      ("n" "Note" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
                "* %? :reference:\n" :clock-in t :clock-resume t)
-;;	      ("l" "Log of time" entry (file+headline "~/org/inbox.org" "<Inbox>")
+;;	      ("l" "Log of time" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
 ;;               "* %U: %?\n" :clock-in t :clock-resume t)
-;;              ("m" "Meeting" entry (file+headline "~/org/Errands.org" "<Inbox>")
+;;              ("m" "Meeting" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/Errands.org" "<Inbox>")
 ;;	       "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-              ("i" "Interrupt" entry (file+headline "d:/Sync/CloudStation/App/Emacs/org/inbox.org" "<Inbox>")
+              ("i" "Interrupt" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
 	       "* INTERRUPT by %? :INTERRUPT:\n%U" :clock-in t :clock-resume t)
-	      ("h" "Habit" entry (file+headline "d:/Sync/CloudStation/App/Emacs/org/inbox.org" "<Inbox>")
+	      ("h" "Habit" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
                "* TODO %?\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:END:\n")
-	      ("j" "Journal" entry (file+datetree "d:/Sync/CloudStation/App/Emacs/org/journal.org")
+	      ("j" "Journal" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
-	      ("r" "week review" entry (file+datetree "d:/Sync/CloudStation/App/Emacs/org/journal.org")
+	      ("r" "week review" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
                "* %(format-time-string \"%Y-%W\")(-7)-Review %? :#diary:#week:\n%U\n- 时间开销\n  - 研究: \n  - 阅读: \n  - 工程: \n  - 院系: \n  - 组织: \n- 上周计划\n  \n- 主要完成任务\n  \n- 回顾\n\n- 总结\n\n" :clock-in t :clock-resume t)
-	      ("p" "week plan" entry (file+datetree "d:/Sync/CloudStation/App/Emacs/org/journal.org")
+	      ("p" "week plan" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
                "* %(format-time-string \"%Y-%W\")(-7)-Plan%? :#plan:#week:\n%U\n- [ ] \n" :clock-in t :clock-resume t)
 	      )))
 ;;     Remove empty LOGBOOK drawers on clock out
@@ -341,8 +341,8 @@
 (add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
 
 (setq org-link-abbrev-alist
-  '(("filepath"  . "d:/Sync/CloudStation/App/Emacs/org/LinkFiles/")
-    ("bibpath"   . "d:/Sync/CloudStation/BibliographyLib/")))
+      '(("filepath"  . "d:/Sync/CloudStation/orgmode/LinkFiles/")
+    ("bibpath"   . "d:/Sync/CloudStation/orgmode/BibliographyLib/")))
 ;;  (font-lock-fontify-buffer))
 
 ;; org链接的默认打开程序
