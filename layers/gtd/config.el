@@ -1,6 +1,4 @@
-(setq org-clock-continuously t)  ;; 连续时钟
-(setq org-clock-mode-line-total 'current)  ;; 显示当前时长
-;; tags
+﻿;; tags
 (setq org-tag-persistent-alist '(("errands" . ?e) ("work" . nil)
 		      (:startgroup . nil) ("family" . nil)
                       ("engineering" . nil) ("faculty" . nil)
@@ -102,9 +100,9 @@
 	      ("j" "Journal" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
 	      ("r" "week review" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
-               "* %(format-time-string \"%Y-%W\")(-7)-Review %? :#diary:#week:\n%U\n- 时间开销\n  - 研究: \n  - 阅读: \n  - 工程: \n  - 院系: \n  - 组织: \n- 上周计划\n  \n- 主要完成任务\n  \n- 回顾\n\n- 总结\n\n" :clock-in t :clock-resume t)
+               "* %(format-time-string \"%Y-%W\")(-35)-review %? :#diary:#week:\n%U\n- 时间开销\n  - 研究: \n  - 阅读: \n  - 工程: \n  - 院系: \n  - 组织: \n- 上周计划\n  \n- 主要完成任务\n  \n- 回顾\n\n- 总结\n\n" :clock-in t :clock-resume t)
 	      ("p" "week plan" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
-               "* %(format-time-string \"%Y-%W\")(-7)-Plan%? :#plan:#week:\n%U\n- [ ] \n" :clock-in t :clock-resume t)
+               "* %(format-time-string \"%Y-%W\")(-35)-plan%? :#plan:#week:\n%U\n- [ ] \n" :clock-in t :clock-resume t)
 	      )))
 ;;     Remove empty LOGBOOK drawers on clock out
 (defun bh/remove-empty-drawer-on-clock-out ()
