@@ -30,7 +30,8 @@
 ;;; Code:
 
 (defconst gtd-packages
-  '()
+  '(
+    org-clock-convenience)
   "The list of Lisp packages required by the gtd layer.
 
 Each entry is either:
@@ -58,4 +59,12 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
+(defun gtd/init-org-clock-convenience()
+  (use-package org-clock-convenience
+    :ensure t
+    :bind (:map org-agenda-mode-map
+                ("<S-up>" . org-clock-convenience-timestamp-up)
+                ("<S-down>" . org-clock-convenience-timestamp-down)
+                ("o" . org-clock-convenience-fill-gap)
+                ("e" . org-clock-convenience-fill-gap-both))))
 ;;; packages.el ends here

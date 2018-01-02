@@ -32,7 +32,8 @@
       '(youdao-dictionary)
       )
 (defun looking/post-init-youdao-dictionary()
-  (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
+  (use-package youdao-dictionary
+  (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+))
   )
 
 ;;; packages.el ends here

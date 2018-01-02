@@ -100,9 +100,9 @@
 	      ("j" "Journal" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
                "* %?\n%U\n" :clock-in t :clock-resume t)
 	      ("r" "week review" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
-               "* %(format-time-string \"%Y-%W\")(-35)-review %? :#diary:#week:\n%U\n- 时间开销\n  - 研究: \n  - 阅读: \n  - 工程: \n  - 院系: \n  - 组织: \n- 上周计划\n  \n- 主要完成任务\n  \n- 回顾\n\n- 总结\n\n" :clock-in t :clock-resume t)
+               "* %(format-time-string \"%Y-%W\")(+17)-review %? :#diary:#week:\n%U\n- 时间开销\n  - 研究: \n  - 阅读: \n  - 工程: \n  - 院系: \n  - 组织: \n- 上周计划\n  \n- 主要完成任务\n  \n- 回顾\n\n- 总结\n\n" :clock-in t :clock-resume t)
 	      ("p" "week plan" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
-               "* %(format-time-string \"%Y-%W\")(-35)-plan%? :#plan:#week:\n%U\n- [ ] \n" :clock-in t :clock-resume t)
+               "* %(format-time-string \"%Y-%W\")(+17)-plan%? :#plan:#week:\n%U\n- [ ] \n" :clock-in t :clock-resume t)
 	      )))
 ;;     Remove empty LOGBOOK drawers on clock out
 (defun bh/remove-empty-drawer-on-clock-out ()
@@ -297,7 +297,7 @@
                                             ("a)" . "-")
                                             ("a." . "a)"))))
 ;; 18.4
-;; (require 'org-checklist)
+;;(require 'org-checklist)
 
 (add-hook 'org-after-todo-state-change-hook 'bh/mark-next-parent-tasks-todo 'append)
 (add-hook 'org-clock-in-hook 'bh/mark-next-parent-tasks-todo 'append)
@@ -360,3 +360,4 @@
 ;;;;;;;;;;;;;;;;;;;;;
 ;; \\\\\\\\\\\\\\\ org-mode ///////////////
 
+(add-hook 'org-agenda-mode-hook #'dfeich/org-agenda-mode-fn)

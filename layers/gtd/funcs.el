@@ -471,3 +471,13 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
               (setq params (plist-put params :tags tag))
               (clocktable-by-tag/insert-tag params))
             tags)))
+
+(defun dfeich/org-agenda-mode-fn ()
+  (define-key org-agenda-mode-map
+    (kbd "<S-up>") #'org-clock-convenience-timestamp-up)
+  (define-key org-agenda-mode-map
+    (kbd "<S-down>") #'org-clock-convenience-timestamp-down)
+  (define-key org-agenda-mode-map
+    (kbd "o") #'org-clock-convenience-fill-gap)
+  (define-key org-agenda-mode-map
+    (kbd "e") #'org-clock-convenience-fill-gap-both))
