@@ -1,14 +1,16 @@
+﻿
 ;; AucTex, helm-bibtex, ebib,  cdlatex, exportToLatex
-(setenv "PATH" (concat (getenv "PATH") ";c:/texlive/2015/bin/win32/"))
+(setenv "PATH" (concat (getenv "PATH") ";c:/texlive/2018/bin/win32/;c:/Program Files (x86)/Graphviz 2.28/bin/"))
 (setq Org-Latex-Create-Formula-Image-Program 'imagemagick)
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
 (setq-default TeX-master nil)
-
+(setq org-latex-create-formula-image-program 'imagemagick)
+(setq org-latex-create-formula-image-program 'dvipng)
 (setq TeX-PDF-mode t)
 (setq TeX-source-correlate-mode t)
 (setq TeX-source-correlate-method 'synctex)
-(setq TeX-view-program-list '(("Sumatra PDF" ("d:/Sync/CloudStation/App/Others/SumatraPDF.exe -reuse-instance"
+(setq TeX-view-program-list '(("Sumatra PDF" ("d:/Sync/Drive/App/Others/SumatraPDF.exe -reuse-instance"
                       (mode-io-correlate " -forward-search %b %n ") " %o"))))
 ;; (setq TeX-view-program-list '(("SumatraPDF" "c:/Programs/Sumatra_PDF/SumatraPDF.exe -reuse-instance %o")))
 
@@ -22,23 +24,16 @@
      (assq-delete-all 'output-pdf TeX-view-program-selection)
      (add-to-list 'TeX-view-program-selection '(output-pdf "Sumatra PDF"))))
 
-(add-hook 'LaTeX-mode-hook (lambda()
-			     (add-to-list 'TeX-command-list '("XeLaTeX" "xelatex %t" TeX-run-TeX nil (latex-mode) ))
-			     (setq TeX-command-default "XeLaTeX")
-			     (setq TeX-save-query  nil )
-			     (setq TeX-show-compilation nil)
-			     (setq Tex-PDF-mode t)
-			     (local-set-key (kbd "<f10>") 'TeX-command-run-all)))
 ;; helm-bibtex
 (autoload 'helm-bibtex "helm-bibtex" "" t)
 ;;(setq helm-bibtex-bibliography '("~/org/Writing/MyCollection.bib"))
-(setq bibtex-completion-bibliography '("~/org/Writing/MyCollection.bib"))
+(setq bibtex-completion-bibliography '("d:/Sync/Drive/orgmode/orgfiles/writing/MyCitation.bib"))
 
 ;; ebib
 (global-set-key "\C-ce" 'ebib)
 ;; cdlatex
 (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)   ; with AUCTeX LaTeX mode
-(add-hook 'latex-mode-hook 'turn-on-cdlatex)   ; with Emacs latex mode
+;; (add-hook 'latex-mode-hook 'turn-on-cdlatex)   ; with Emacs latex mode
 
 ;; exportToLatex
 (setq org-latex-classes
@@ -90,18 +85,18 @@
 ;; Use XeLaTeX to export PDF in Org-mode
 (setq org-latex-pdf-process
       '("xelatex -interaction nonstopmode -output-directory %o %f"
+        "bibtex -interaction nonstopmode -output-directory %o %f"
         "xelatex -interaction nonstopmode -output-directory %o %f"
         "xelatex -interaction nonstopmode -output-directory %o %f"))
 
 ;; org-ref
-(setq reftex-default-bibliography '("d:/Sync/CloudStation/orgmode/orgfiles/writing/MyCitation.bib"))
-(setq org-ref-bibliography-notes "d:/Sync/CloudStation/orgmode/orgfiles/bibliography.org"
-      org-ref-default-bibliography '("d:/Sync/CloudStation/orgmode/orgfiles/writing/MyCitation.bib")
-      org-ref-pdf-directory "d:/Sync/CloudStation/orgmode/BibliographyLib/")
-(setq bibtex-completion-bibliography "d:/Sync/CloudStation/orgmode/orgfiles/writing/MyCitation.bib"
-      bibtex-completion-library-path "d:/Sync/CloudStation/BibliographyLib/"
-      bibtex-completion-notes-path "d:/Sync/CloudStation/orgmode/orgfiles/writing/helm-bibtex-notes")
-(setq bibtex-completion-pdf-open-function 'org-open-file)
+(setq reftex-default-bibliography '("d:/Sync/Drive/orgmode/orgfiles/writing/MyCitation.bib"))
+(setq org-ref-bibliography-notes "d:/Sync/Drive/orgmode/orgfiles/bibliography.org"
+      org-ref-default-bibliography '("d:/Sync/Drive/orgmode/orgfiles/writing/MyCitation.bib")
+      org-ref-pdf-directory "d:/Sync/Drive/orgmode/BibliographyLib/")
+(setq bibtex-completion-bibliography "d:/Sync/Drive/orgmode/orgfiles/writing/MyCitation.bib"
+      bibtex-completion-library-path "d:/Sync/Drive/BibliographyLib/"
+      bibtex-completion-notes-path "d:/Sync/Drive/orgmode/orgfiles/writing/helm-bibtex-notes")
 
 ;; open pdf with system pdf viewer (works on mac)
 ;; (setq bibtex-completion-pdf-open-function
@@ -113,3 +108,4 @@
 ;;
 ;;(require 'org-attach-screenshot)
 ;;(setq org-attach-screenshot-dirfunction  "~\org\LinkFiles\")
+

@@ -16,16 +16,17 @@
 		      ("FLAGGED" . ??)
                       ))
 ;; agenda files -- 4.4 V
-(setq org-agenda-files (list "d:/Sync/CloudStation/orgmode/orgfiles/researchProj.org"
-			     "d:/Sync/CloudStation/orgmode/orgfiles/riverProj.org"
-			     "d:/Sync/CloudStation/orgmode/orgfiles/othersProj.org"
-			     "d:/Sync/CloudStation/orgmode/orgfiles/bibliography.org"
-			     "d:/Sync/CloudStation/orgmode/orgfiles/knowledge.org"
-			     "d:/Sync/CloudStation/orgmode/orgfiles/faculty.org"
-			     "d:/Sync/CloudStation/orgmode/orgfiles/family.org"
-			     "d:/Sync/CloudStation/orgmode/orgfiles/journal.org"
-			     "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org"
-			     "d:/Sync/CloudStation/orgmode/orgfiles/articals.org"
+(setq org-agenda-files (list
+           "d:/Sync/Drive/orgmode/orgfiles/researchProj.org"
+			     "d:/Sync/Drive/orgmode/orgfiles/riverProj.org"
+			     "d:/Sync/Drive/orgmode/orgfiles/othersProj.org"
+			     "d:/Sync/Drive/orgmode/orgfiles/bibliography.org"
+			     "d:/Sync/Drive/orgmode/orgfiles/knowledge.org"
+			     "d:/Sync/Drive/orgmode/orgfiles/faculty.org"
+			     "d:/Sync/Drive/orgmode/orgfiles/family.org"
+			     "d:/Sync/Drive/orgmode/orgfiles/journal.org"
+			     "d:/Sync/Drive/orgmode/orgfiles/inbox.org"
+			     "d:/Sync/Drive/orgmode/orgfiles/articals.org"
 			     ))
 ; (setq org-agenda-files (list "~/org/researchProj.org"
 ;                              "~/org/riverProj.org"
@@ -68,14 +69,14 @@
 (setq org-use-fast-todo-selection t)
 (setq org-treat-S-cursor-todo-selection-as-state-change nil)
 (setq org-todo-state-tags-triggers
-      (quote (("CANCELLED" ("CANCELLED" . t))
-              ("WAITING" ("WAITING" . t))
-              ("HOLD" ("WAITING") ("HOLD" . t))
-              (done ("WAITING") ("HOLD") ("ARRANGED"))
-              ("TODO" ("CANCELLED") ("HOLD") ("WAITING") ("ARRANGED"))
-              ("NEXT" ("CANCELLED") ("HOLD") ("WAITING") ("ARRANGED"))
+      (quote (("CANCELLED" ("NEXT") ("CANCELLED" . t))
+              ("WAITING" ("NEXT") ("WAITING" . t))
+              ("HOLD" ("WAITING") ("NEXT") ("HOLD" . t))
+              (done ("WAITING") ("NEXT") ("HOLD") ("ARRANGED"))
+              ("TODO" ("CANCELLED") ("HOLD") ("WAITING") ("ARRANGED") ("NEXT"))
+              ("NEXT" ("CANCELLED") ("HOLD") ("WAITING") ("ARRANGED") ("NEXT" . t))
               ("ARRANGED" ("ARRANGED" . t) ("TODO") ("NEXT") ("CANCELLED") ("HOLD") ("WAITING"))
-              ("DONE" ("CANCELLED") ("HOLD") ("WAITING") ("ARRANGED")))))
+              ("DONE" ("CANCELLED") ("HOLD") ("WAITING") ("ARRANGED") ("NEXT")))))
 ;;(setq org-todo-state-tags-triggers
 ;;      (quote (("ARRANGED" ("NEXT") ("HOLD") ("ARRANGED" . t))
 ;;              ("TODO" ("NEXT") ("ARRANGED"))
@@ -85,36 +86,31 @@
 ;;              ("DONE" ("ARRANGED") ("NEXT") ("HOLD")))))
 ;; capture tasks -- 6.1
 (setq org-capture-templates
-      (quote (("t" "Todo" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
+      (quote (("t" "Todo" entry (file+headline "d:/Sync/Drive/orgmode/orgfiles/inbox.org" "<Inbox>")
                "* TODO %?\n %i\n" :clock-in t :clock-resume t)
-;;	      ("d" "Dictionary" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
+;;	      ("d" "Dictionary" entry (file+headline "d:/Sync/Drive/orgmode/orgfiles/inbox.org" "<Inbox>")
 ;;	       "* TODO Dictionary: %?\n" :clock-in t :clock-resume t)
-	      ("n" "Note" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
+	      ("n" "Note" entry (file+headline "d:/Sync/Drive/orgmode/orgfiles/inbox.org" "<Inbox>")
                "* %? :reference:\n" :clock-in t :clock-resume t)
-;;	      ("l" "Log of time" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
+;;	      ("l" "Log of time" entry (file+headline "d:/Sync/Drive/orgmode/orgfiles/inbox.org" "<Inbox>")
 ;;               "* %U: %?\n" :clock-in t :clock-resume t)
-;;              ("m" "Meeting" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/Errands.org" "<Inbox>")
+;;              ("m" "Meeting" entry (file+headline "d:/Sync/Drive/orgmode/orgfiles/Errands.org" "<Inbox>")
 ;;	       "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-              ("i" "Interrupt" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
+              ("i" "Interrupt" entry (file+headline "d:/Sync/Drive/orgmode/orgfiles/inbox.org" "<Inbox>")
 	       "* INTERRUPT by %? :INTERRUPT:\n%U" :clock-in t :clock-resume t)
-	      ("h" "Habit" entry (file+headline "d:/Sync/CloudStation/orgmode/orgfiles/inbox.org" "<Inbox>")
+	      ("h" "Habit" entry (file+headline "d:/Sync/Drive/orgmode/orgfiles/inbox.org" "<Inbox>")
                "* TODO %?\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: TODO\n:END:\n")
-	      ("a" "DailyPlan" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
-         "* %(format-time-string \"%Y-%m-%d\")-plan :#plan:#day:\n%U\n- 重要紧急\n  + [ ] %?\n- 重要不紧急\n- 紧急不重要\n- 不重要不紧急\n- 拥有的时间\n  + " :clock-in t :clock-resume t)
-	      ("j" "DailyDiary" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
+	      ("a" "DailyPlan" entry (file+datetree "d:/Sync/Drive/orgmode/orgfiles/journal.org")
+         "* %(format-time-string \"%Y-%m-%d\")-plan :#plan:#day:\n%U\n1. 重要紧急\n  1) [ ] %?\n2. 重要不紧急\n3. 紧急不重要\n4. 不重要不紧急\n5. 拥有的时间\n  |time|plan|done|evaluation|\n  |-- " :clock-in t :clock-resume t)
+	      ("j" "DailyDiary" entry (file+datetree "d:/Sync/Drive/orgmode/orgfiles/journal.org")
          "* [#C] %(format-time-string \"%Y-%m-%d\")-review :#diary:#day:\n%U\n- 时间统计\n  + %?\n- 小结\n  今天" :clock-in t :clock-resume t)
-	      ("r" "week review" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
+	      ("r" "week review" entry (file+datetree "d:/Sync/Drive/orgmode/orgfiles/journal.org")
                "* %(format-time-string \"%Y-%W\")(-8)-review %? :#diary:#week:\n%U\n- 时间开销\n  - 研究: \n  - 阅读: \n  - 工程: \n  - 院系: \n  - 组织: \n- 上周计划\n  \n- 主要完成任务\n  + [ ] \n- 回顾\n\n- 总结\n" :clock-in t :clock-resume t)
-	      ("p" "week plan" entry (file+datetree "d:/Sync/CloudStation/orgmode/orgfiles/journal.org")
+	      ("p" "week plan" entry (file+datetree "d:/Sync/Drive/orgmode/orgfiles/journal.org")
          "* %(format-time-string \"%Y-%W\")(-8)-plan :#plan:#week:FLAGGED:\n%U\n- 重要紧急\n  + [ ] %?\n- 重要不紧急\n  + [ ] \n- 紧急不重要\n  + [ ] \n- 不重要不紧急\n  + [ ] \n" :clock-in t :clock-resume t)
 	      )))
+
 ;;     Remove empty LOGBOOK drawers on clock out
-(defun bh/remove-empty-drawer-on-clock-out ()
-  (interactive)
-  (save-excursion
-    (beginning-of-line 0)
-    (org-remove-empty-drawer-at (point))))
-    ;; (org-remove-empty-drawer-at "LOGBOOK" (point))))
 (add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
 ;; refile -- 7.1
 ;;     Targets include this file and any file contributing to the agenda - up to 9 levels deep
@@ -289,7 +285,76 @@
 (setq org-stuck-projects (quote ("" nil nil "")))
 
 (defvar bh/hide-scheduled-and-waiting-next-tasks t)
+;; 18.2.1
+(add-hook 'org-agenda-mode-hook
+          '(lambda () (org-defkey org-agenda-mode-map "W" (lambda () (interactive) (setq bh/hide-scheduled-and-waiting-next-tasks t) (bh/widen))))
+          'append)
 
+(add-hook 'org-agenda-mode-hook
+          '(lambda () (org-defkey org-agenda-mode-map "F" 'bh/restrict-to-file-or-follow))
+          'append)
+
+(add-hook 'org-agenda-mode-hook
+          '(lambda () (org-defkey org-agenda-mode-map "N" 'bh/narrow-to-subtree))
+          'append)
+
+(add-hook 'org-agenda-mode-hook
+          '(lambda () (org-defkey org-agenda-mode-map "U" 'bh/narrow-up-one-level))
+          'append)
+
+(add-hook 'org-agenda-mode-hook
+          '(lambda () (org-defkey org-agenda-mode-map "P" 'bh/narrow-to-project))
+          'append)
+
+(defvar bh/project-list nil)
+
+(add-hook 'org-agenda-mode-hook
+          '(lambda () (org-defkey org-agenda-mode-map "V" 'bh/view-next-project))
+          'append)
+
+;; 18.2.2
+(add-hook 'org-agenda-mode-hook
+          '(lambda () (org-defkey org-agenda-mode-map "\C-c\C-x<" 'bh/set-agenda-restriction-lock))
+          'append)
+;; Limit restriction lock highlighting to the headline only
+(setq org-agenda-restriction-lock-highlight-subtree nil)
+;;;; 18.3.1
+;;;; Always hilight the current agenda line
+;;(add-hook 'org-agenda-mode-hook
+;;          '(lambda () (hl-line-mode 1))
+;;          'append)
+;;  ;; The following custom-set-faces create the highlights
+;;(custom-set-faces
+;; ;; custom-set-faces was added by Custom.
+;; ;; If you edit it by hand, you could mess it up, so be careful.
+;; ;; Your init file should contain only one such instance.
+;; ;; If there is more than one, they won't work right.
+;; '(org-mode-line-clock ((t (:background "grey75" :foreground "red" :box (:line-width -1 :style released-button)))) t))
+;; 18.3.2
+;; Keep tasks with dates on the global todo lists
+(setq org-agenda-todo-ignore-with-date nil)
+;; Keep tasks with deadlines on the global todo lists
+(setq org-agenda-todo-ignore-deadlines nil)
+;; Keep tasks with scheduled dates on the global todo lists
+(setq org-agenda-todo-ignore-scheduled nil)
+;; Keep tasks with timestamps on the global todo lists
+(setq org-agenda-todo-ignore-timestamp nil)
+;; Remove completed deadline tasks from the agenda view
+(setq org-agenda-skip-deadline-if-done t)
+;; Remove completed scheduled tasks from the agenda view
+(setq org-agenda-skip-scheduled-if-done t)
+;; Remove completed items from search results
+(setq org-agenda-skip-timestamp-if-done t)
+;; 18.3.6
+(setq org-agenda-sticky t)
+;; 18.7.3
+(setq org-cycle-separator-lines 0)
+(setq org-blank-before-new-entry (quote ((heading)
+                                         (plain-list-item . auto))))
+;; 18.7.6
+(setq org-show-following-heading t)
+(setq org-show-hierarchy-above t)
+(setq org-show-siblings (quote ((default))))
 ;; 18.28
 (setq org-list-demote-modify-bullet (quote (("-" . "+")
                                             ("+" . "*")
@@ -305,9 +370,16 @@
 
 (add-hook 'org-after-todo-state-change-hook 'bh/mark-next-parent-tasks-todo 'append)
 (add-hook 'org-clock-in-hook 'bh/mark-next-parent-tasks-todo 'append)
+;; 18.52
+(setq org-catch-invisible-edits 'error)
 ;; 18.54
 (setq org-time-clocksum-format
       '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+;; 19.8
+(add-hook 'org-agenda-mode-hook
+          (lambda ()
+            (define-key org-agenda-mode-map "q" 'bury-buffer))
+          'append)
 ;; 19.9
 (setq org-enable-priority-commands t)
 (setq org-default-priority ?E)
@@ -343,8 +415,8 @@
 (add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
 
 (setq org-link-abbrev-alist
-      '(("filepath"  . "d:/Sync/CloudStation/orgmode/LinkFiles/")
-    ("bibpath"   . "d:/Sync/CloudStation/orgmode/BibliographyLib/")))
+      '(("filepath"  . "d:/Sync/Drive/orgmode/LinkFiles/")
+    ("bibpath"   . "d:/Sync/Drive/orgmode/BibliographyLib/")))
 ;;  (font-lock-fontify-buffer))
 
 ;; org链接的默认打开程序
@@ -365,3 +437,4 @@
 ;; \\\\\\\\\\\\\\\ org-mode ///////////////
 
 (add-hook 'org-agenda-mode-hook #'dfeich/org-agenda-mode-fn)
+

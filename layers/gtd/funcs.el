@@ -21,6 +21,7 @@ A prefix arg forces clock in of the default task."
     (widen)
     (org-with-point-at clock-in-to-task
       (org-clock-in nil))))
+
 ;;     function-2
 (defun bh/set-truncate-lines ()
   "Toggle value of truncate-lines and refresh window display."
@@ -30,6 +31,7 @@ A prefix arg forces clock in of the default task."
   (save-excursion
     (set-window-start (selected-window)
                       (window-start (selected-window)))))
+
 ;;     function-3
 (defun bh/hide-other ()
   (interactive)
@@ -40,6 +42,7 @@ A prefix arg forces clock in of the default task."
     (org-cycle)
     (org-cycle)
     (org-cycle)))
+
 ;;     function-4
 (defun bh/toggle-next-task-display ()
   (interactive)
@@ -47,9 +50,19 @@ A prefix arg forces clock in of the default task."
   (when  (equal major-mode 'org-agenda-mode)
     (org-agenda-redo))
   (message "%s ARRANGED and SCHEDULED NEXT Tasks" (if bh/hide-scheduled-and-waiting-next-tasks "Hide" "Show")))
+
 ;;     function-5
 (setq bh/keep-clock-running nil)
 
+;;     f9 f9
+(defun bh/show-org-agenda ()
+  (interactive)
+  (if org-agenda-sticky
+      (switch-to-buffer "*Org Agenda( )*")
+    (switch-to-buffer "*Org Agenda*"))
+  (delete-other-windows))
+
+;;
 (defun bh/punch-in (arg)
   "Start continuous clocking and set the default task to the
 selected task.  If no task is selected set the Organization task
@@ -74,6 +87,7 @@ as the default task."
       (if (and (equal major-mode 'org-mode) (not (org-before-first-heading-p)) (eq arg 4))
           (org-clock-in '(16))
         (bh/clock-in-organization-task-as-default)))))
+
 ;;     function-6
 (defvar bh/organization-task-id "eb155a82-92b2-4f25-a3c6-0304591af2f9")
 
@@ -155,8 +169,8 @@ Switch projects and subprojects from NEXT back to TODO"
   "Clock in a task by id"
   (org-with-point-at (org-id-find id 'marker)
     (org-clock-in nil)))
-;; Agenda clock report parameters
 
+;; Agenda clock report parameters
 (defun my-org-clocktable-indent-string (level)
   (if (= level 1)
       ""
@@ -165,6 +179,7 @@ Switch projects and subprojects from NEXT back to TODO"
         (setq level (1- level)
               str (concat str "...")))
       (concat str "\\__ "))))
+
 (advice-add 'org-clocktable-indent-string :override #'my-org-clocktable-indent-string)
 
 ;; 14.2
@@ -412,6 +427,153 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
     (if (bh/is-subproject-p)
         nil
       next-headline)))
+;; 18.2.1
+(defun bh/org-todo (arg)
+  (interactive "p")
+  (if (equal arg 4)
+      (save-restriction
+        (bh/narrow-to-org-subtree)
+        (org-show-todo-tree nil))
+    (bh/narrow-to-org-subtree)
+    (org-show-todo-tree nil)))
+(defun bh/widen ()
+  (interactive)
+  (if (equal major-mode 'org-agenda-mode)
+      (progn
+        (org-agenda-remove-restriction-lock)
+        (when org-agenda-sticky
+          (org-agenda-redo)))
+    (widen)))
+
+(defun bh/restrict-to-file-or-follow (arg)
+  "Set agenda restriction to 'file or with argument invoke follow mode.
+I don't use follow mode very often but I restrict to file all the time
+so change the default 'F' binding in the agenda to allow both"
+  (interactive "p")
+  (if (equal arg 4)
+      (org-agenda-follow-mode)
+    (widen)
+    (bh/set-agenda-restriction-lock 4)
+    (org-agenda-redo)
+    (beginning-of-buffer)))
+
+(defun bh/narrow-to-org-subtree ()
+  (widen)
+  (org-narrow-to-subtree)
+  (save-restriction
+    (org-agenda-set-restriction-lock)))
+
+(defun bh/narrow-to-subtree ()
+  (interactive)
+  (if (equal major-mode 'org-agenda-mode)
+      (progn
+        (org-with-point-at (org-get-at-bol 'org-hd-marker)
+          (bh/narrow-to-org-subtree))
+        (when org-agenda-sticky
+          (org-agenda-redo)))
+    (bh/narrow-to-org-subtree)))
+
+(defun bh/narrow-up-one-org-level ()
+  (widen)
+  (save-excursion
+    (outline-up-heading 1 'invisible-ok)
+    (bh/narrow-to-org-subtree)))
+
+(defun bh/get-pom-from-agenda-restriction-or-point ()
+  (or (and (marker-position org-agenda-restrict-begin) org-agenda-restrict-begin)
+      (org-get-at-bol 'org-hd-marker)
+      (and (equal major-mode 'org-mode) (point))
+      org-clock-marker))
+
+(defun bh/narrow-up-one-level ()
+  (interactive)
+  (if (equal major-mode 'org-agenda-mode)
+      (progn
+        (org-with-point-at (bh/get-pom-from-agenda-restriction-or-point)
+          (bh/narrow-up-one-org-level))
+        (org-agenda-redo))
+    (bh/narrow-up-one-org-level)))
+
+(defun bh/narrow-to-org-project ()
+  (widen)
+  (save-excursion
+    (bh/find-project-task)
+    (bh/narrow-to-org-subtree)))
+
+(defun bh/narrow-to-project ()
+  (interactive)
+  (if (equal major-mode 'org-agenda-mode)
+      (progn
+        (org-with-point-at (bh/get-pom-from-agenda-restriction-or-point)
+          (bh/narrow-to-org-project)
+          (save-excursion
+            (bh/find-project-task)
+            (org-agenda-set-restriction-lock)))
+        (org-agenda-redo)
+        (beginning-of-buffer))
+    (bh/narrow-to-org-project)
+    (save-restriction
+      (org-agenda-set-restriction-lock))))
+
+(defun bh/view-next-project ()
+  (interactive)
+  (let (num-project-left current-project)
+    (unless (marker-position org-agenda-restrict-begin)
+      (goto-char (point-min))
+      ; Clear all of the existing markers on the list
+      (while bh/project-list
+        (set-marker (pop bh/project-list) nil))
+      (re-search-forward "Tasks to Refile")
+      (forward-visible-line 1))
+
+    ; Build a new project marker list
+    (unless bh/project-list
+      (while (< (point) (point-max))
+        (while (and (< (point) (point-max))
+                    (or (not (org-get-at-bol 'org-hd-marker))
+                        (org-with-point-at (org-get-at-bol 'org-hd-marker)
+                          (or (not (bh/is-project-p))
+                              (bh/is-project-subtree-p)))))
+          (forward-visible-line 1))
+        (when (< (point) (point-max))
+          (add-to-list 'bh/project-list (copy-marker (org-get-at-bol 'org-hd-marker)) 'append))
+        (forward-visible-line 1)))
+
+    ; Pop off the first marker on the list and display
+    (setq current-project (pop bh/project-list))
+    (when current-project
+      (org-with-point-at current-project
+        (setq bh/hide-scheduled-and-waiting-next-tasks nil)
+        (bh/narrow-to-project))
+      ; Remove the marker
+      (setq current-project nil)
+      (org-agenda-redo)
+      (beginning-of-buffer)
+      (setq num-projects-left (length bh/project-list))
+      (if (> num-projects-left 0)
+          (message "%s projects left to view" num-projects-left)
+        (beginning-of-buffer)
+        (setq bh/hide-scheduled-and-waiting-next-tasks t)
+        (error "All projects viewed.")))))
+
+;; 18.2.2
+(defun bh/set-agenda-restriction-lock (arg)
+  "Set restriction lock to current task subtree or file if prefix is specified"
+  (interactive "p")
+  (let* ((pom (bh/get-pom-from-agenda-restriction-or-point))
+         (tags (org-with-point-at pom (org-get-tags-at))))
+    (let ((restriction-type (if (equal arg 4) 'file 'subtree)))
+      (save-restriction
+        (cond
+         ((and (equal major-mode 'org-agenda-mode) pom)
+          (org-with-point-at pom
+            (org-agenda-set-restriction-lock restriction-type))
+          (org-agenda-redo))
+         ((and (equal major-mode 'org-mode) (org-before-first-heading-p))
+          (org-agenda-set-restriction-lock 'file))
+         (pom
+          (org-with-point-at pom
+            (org-agenda-set-restriction-lock restriction-type))))))))
 
 ;; 18.46
 (defun bh/mark-next-parent-tasks-todo ()
@@ -481,3 +643,11 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
     (kbd "o") #'org-clock-convenience-fill-gap)
   (define-key org-agenda-mode-map
     (kbd "e") #'org-clock-convenience-fill-gap-both))
+
+;;     Remove empty LOGBOOK drawers on clock out
+(defun bh/remove-empty-drawer-on-clock-out ()
+  (interactive)
+  (save-excursion
+    (beginning-of-line 0)
+    (org-remove-empty-drawer-at (point))))
+;; (org-remove-empty-drawer-at "LOGBOOK" (point))))

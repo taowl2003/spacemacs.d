@@ -1,4 +1,4 @@
-;;; packages.el --- twl-latex layer packages file for Spacemacs.
+﻿;;; packages.el --- twl-latex layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
@@ -28,19 +28,41 @@
 ;;   `twl-latex/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
-(setq twl-latex-packages
-      '(
-        org-ref
-        org-ref-url-utils
-        ))
+
 (defun twl-latex/init-org-ref()
-  (use-package org-ref))
+  (use-package org-ref)
+)
 
 (defun twl-latex/init-org-ref-url-utils()
   (use-package org-ref-url-utils))
 
+(defun twl-latex/init-babel()
+  (use-package babel)
+)
+
+(defun twl-latex/post-init-babel()
+   (setq org-confirm-babel-evaluate nil) ;;在用C-c C-c执行代码块时,不再提示“Do you want to execute”
+   (setq org-src-fontify-natively t) ;; Org-mode 文本内语法高亮
+   (setq org-plantuml-jar-path (expand-file-name "d:/Sync/Drive/App/Others/plantuml.jar"))
+   (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+     (latex . t)
+     (python . t)
+     (emacs-lisp . t)
+     (C . t)
+     (calc . t)
+     (octave . t)
+     (plantuml . t)
+     (dot . t)
+     ))
+)
+
 (defconst twl-latex-packages
-  '()
+  '(
+    org-ref
+    babel
+    )
   "The list of Lisp packages required by the twl-latex layer.
 
 Each entry is either:
