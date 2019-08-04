@@ -38,7 +38,7 @@
 ;; exportToLatex
 (setq org-latex-classes
       '(("article"
-         "\\documentclass[final]{IEEEtran}
+         "\\documentclass[final]{submitArticle}
 
 \\usepackage{geometry}
 \\geometry{verbose, tmargin=30mm, bmargin=20mm, lmargin=30mm, rmargin=20mm}

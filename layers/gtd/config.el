@@ -1,4 +1,7 @@
 ﻿;; tags
+(setq org-agenda-start-on-weekday 6)
+(setq system-time-locale "C")  
+
 (setq org-tag-persistent-alist '(("errands" . ?e) ("work" . nil)
 		      (:startgroup . nil) ("family" . nil)
                       ("engineering" . nil) ("faculty" . nil)
