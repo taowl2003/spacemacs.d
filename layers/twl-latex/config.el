@@ -73,6 +73,7 @@
         ("" "rotating" nil)
         ("normalem" "ulem" t)
         ("" "amsmath" t)
+        ("" "mathtools" t)
         ("" "textcomp" t)
         ("" "marvosym" t)
         ("" "wasysym" t)

@@ -375,6 +375,8 @@ you should place your code here."
   (setq spaceline-org-clock-p t)
   (setq-default evil-escape-key-sequence "jk")
   (spacemacs/set-leader-keys "oy" 'youdao-dictionary-search-at-point+)
+  (setcdr evil-insert-state-map nil)
+  (define-key evil-insert-state-map [escape] 'evil-normal-state)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
