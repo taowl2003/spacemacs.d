@@ -31,43 +31,42 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     octave
-     markdown
-     autohotkey
-     javascript
-     html
+     ;; octave
+     ;; autohotkey
+     ;; javascript
+     ;; html
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      chinese
-     pandoc
+     ;; pandoc
      helm
      auto-completion
      ;; better-defaults
-     emacs-lisp
+     ;; emacs-lisp
      git
-     ;; markdown
+     markdown
      ;;org
-     (org :variables org-enable-github-support t)
+     ;; (org :variables org-enable-github-support t)
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     (spell-checking :variables
-                     ispell-program-name "C:/Program Files (x86)/Aspell/bin/aspell.exe"
-                     spell-checking-enable-by-default nil)
+     ;; (spell-checking :variables
+                     ;; ispell-program-name "C:/Program Files (x86)/Aspell/bin/aspell.exe"
+                     ;; spell-checking-enable-by-default nil)
      syntax-checking
      ;; version-control
      latex
      twl-latex
      gtd
      looking
-     graphviz
-     plantuml
+     ;; graphviz
+     ;; plantuml
      ;; mobileorg
      ;; communication
-     vim-powerline
+     ;; vim-powerline
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -76,6 +75,7 @@ values."
    dotspacemacs-additional-packages '(
                                       org-ref
                                       darkroom
+                                      youdao-dictionary
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -344,13 +344,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                (setq Tex-PDF-mode t)
                                (local-set-key (kbd "<f10>") 'TeX-command-run-all)))
   (setq configuration-layer--elpa-archives '(
-                                            ("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
-                                            ("org-cn"   . "http://elpa.zilongshanren.com/org/")
-                                            ("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")))
-  ;;("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
-  ;;("org-cn"   . "http://elpa.emacs-china.org/org/")
-  ;;("gnu-cn"   . "http://elpa.emacs-china.org/gnu/"))))
-  )
+                                            ;;("melpa-cn" . "http://elpa.zilongshanren.com/melpa/")
+                                            ;;("org-cn"   . "http://elpa.zilongshanren.com/org/")
+                                            ;;("gnu-cn"   . "http://elpa.zilongshanren.com/gnu/")
+                                            ;; ("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+                                            ;; ("org-cn"   . "http://elpa.emacs-china.org/org/")
+                                            ;; ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")
+                                             ("melpa-cn" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+                                             ("org-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+                                             ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+  )))
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -403,7 +406,7 @@ you should place your code here."
      ("\\.xlsx\\'" . default))))
  '(package-selected-packages
    (quote
-    (pandoc-mode ox-pandoc ht ox-gfm mmm-mode markdown-toc markdown-mode gh-md graphviz-dot-mode plantuml-mode babel company-auctex auctex-latexmk auctex pdf-tools key-chord ivy helm-bibtex biblio parsebib biblio-core org-ref org-clock-convenience wanderlust semi flim apel web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ahk-mode youdao-dictionary names chinese-word-at-point darkroom pangu-spacing find-by-pinyin-dired chinese-pyim pyim pyim-basedict ace-pinyin pinyinlib org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download htmlize helm-company helm-c-yasnippet gnuplot fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete evil-unimpaired smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bracketed-paste bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+    (mmm-mode pandoc-mode ox-pandoc ht ox-gfm markdown-toc markdown-mode gh-md graphviz-dot-mode plantuml-mode babel company-auctex auctex-latexmk auctex pdf-tools key-chord ivy helm-bibtex biblio parsebib biblio-core org-ref org-clock-convenience wanderlust semi flim apel web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data ahk-mode youdao-dictionary names chinese-word-at-point darkroom pangu-spacing find-by-pinyin-dired chinese-pyim pyim pyim-basedict ace-pinyin pinyinlib org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download htmlize helm-company helm-c-yasnippet gnuplot fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck company-statistics company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete evil-unimpaired smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit with-editor ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bracketed-paste bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
  '(safe-local-variable-values (quote ((Tex-engine . xelatex) (TeX-master . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
